@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  duration: MyText
+  intensity: MyText
+  distance: 
+  calories_burned: 1
+
+two:
+  type: 
+  duration: MyText
+  intensity: MyText
+  distance: 
+  calories_burned: 1

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Weight_Volume: MyString
+  Units_of_Measure: MyString
+  Recipes_id: 
+  FoodItems_id: 
+
+two:
+  Weight_Volume: MyString
+  Units_of_Measure: MyString
+  Recipes_id: 
+  FoodItems_id: 

@@ -1,0 +1,2 @@
+create nutrition facts table, belongs to food items
+review has_many through documentation for tips n tricks
