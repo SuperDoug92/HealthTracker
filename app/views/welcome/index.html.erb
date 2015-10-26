@@ -3,34 +3,11 @@
   <h1>Health Tracker</h1>
   <p>The most automated advanced calorie counter and nutrition tracker on the market!</p>
   <p>
-    <%= link_to "Sign Up", edit_user_registration_path, class: 'btn btn-primary',
-    data: {toggle: "modal", target: "#myModal"} %>
 
-    <div class="modal fade" id="myModal" role="dialog" >
-      <div class="modal-dialog">
-          <div class="modal-content">
-            <p>
-              testing
-              <%= form_for(:user, url: user_session_path) do |f| %>
-              <% end %>
-             </p>
-          </div> <!-- /.modal-content -->
-      </div> <!-- /.modal-dialog -->
-    </div> <!-- /.modal -->
+    <%= link_to 'Sign Up', new_user_registration_path, remote: true, 'data-toggle': "modal", 'data-target': "#sign_up", method: 'get' %>
+
+    <%= render "welcome/sign_up_modal" %>
 ​ or
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       <%= link_to "Sign Up", class: 'btn btn-primary' %> today!
