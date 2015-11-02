@@ -3,10 +3,8 @@
   <h1>Health Tracker</h1>
   <p>The most automated advanced calorie counter and nutrition tracker on the market!</p>
   <p>
-    <%= link_to "Sign Up", "#", class: 'btn btn-primary',
-    data: {toggle: "modal", target: "#myModal"}  %>
-    <%= render "welcome/sign_up" %>
-​     or <%= link_to "Sign Up", class: 'btn btn-primary' %> today!
+    <%= link_to "Sign Up", "users/sign_up", class: 'btn btn-primary'%> or
+    <%= link_to "Sign In", "users/sign_in", class: 'btn btn-primary' %> today!
   </p>
 </div>
 
