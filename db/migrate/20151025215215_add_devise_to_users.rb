@@ -1,6 +1,13 @@
 class AddDeviseToUsers < ActiveRecord::Migration
   def self.up
     create_table(:users) do |t|
+
+      #user info
+      t.string :name
+      t.decimal :weight
+      t.decimal :weight_loss_rate
+      t.decimal :goal_weight
+            
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
