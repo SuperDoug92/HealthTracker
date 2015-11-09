@@ -34,6 +34,10 @@ ActiveRecord::Schema.define(version: 20151025215215) do
   end
 
   create_table "users", force: true do |t|
+    t.string   "name"
+    t.decimal  "weight"
+    t.decimal  "weight_loss_rate"
+    t.decimal  "goal_weight"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

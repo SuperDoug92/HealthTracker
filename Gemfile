@@ -52,3 +52,5 @@ gem 'highcharts-rails'
 gem 'figaro'
 
 gem 'faker'
+
+gem 'health_graph', git: "https://github.com/naveed-ahmad/health_graph.git"
