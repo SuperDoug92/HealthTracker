@@ -22,11 +22,11 @@ class ApplicationController < ActionController::Base
       puts access_token
       puts "hello"
 
-      user = HealthGraph::User.new(access_token)
+      runkeeper_user = HealthGraph::User.new(access_token)
 
-      puts user
-      activity = user.fitness_activity_summary('uri' => 'uri-of-activity')
-      raise
+      puts runkeeper_user
+      activity = runkeeper_user.fitness_activity_summary('uri' => 'uri-of-activity')
+      # raise
     end
 
   end

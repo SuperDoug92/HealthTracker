@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151025215215) do
+ActiveRecord::Schema.define(version: 20151116194123) do
+
+  create_table "activities", force: true do |t|
+    t.string   "source"
+    t.string   "type"
+    t.datetime "start_time"
+    t.integer  "utc_offset"
+    t.decimal  "total_distance"
+    t.decimal  "duration"
+    t.integer  "average_heart_rate"
+    t.decimal  "total_calories"
+    t.decimal  "climb"
+    t.text     "notes"
+    t.integer  "users_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "food_items", force: true do |t|
     t.string   "name"
