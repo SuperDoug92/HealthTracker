@@ -41,6 +41,7 @@ gem 'simple_form'
 #gem 'debugger', group: [:development, :test]
 group :development do
   gem 'annotate'
+  gem 'web-console'
 end
 
 gem 'devise'
@@ -54,3 +55,5 @@ gem 'figaro'
 gem 'faker'
 
 gem 'health_graph', git: "https://github.com/naveed-ahmad/health_graph.git"
+
+# gem 'run_keeper'
