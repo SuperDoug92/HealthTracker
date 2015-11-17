@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116194123) do
+ActiveRecord::Schema.define(version: 20151116234943) do
 
   create_table "activities", force: true do |t|
     t.string   "source"
@@ -24,10 +24,12 @@ ActiveRecord::Schema.define(version: 20151116194123) do
     t.decimal  "total_calories"
     t.decimal  "climb"
     t.text     "notes"
-    t.integer  "users_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id"
 
   create_table "food_items", force: true do |t|
     t.string   "name"

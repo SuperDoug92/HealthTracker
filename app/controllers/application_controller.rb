@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
       puts runkeeper_user
       activity = runkeeper_user.fitness_activity_summary('uri' => 'uri-of-activity')
-      # raise
+      raise
     end
 
   end
