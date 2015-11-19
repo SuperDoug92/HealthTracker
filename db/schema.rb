@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20151116234943) do
     t.decimal  "weight"
     t.decimal  "weight_loss_rate"
     t.decimal  "goal_weight"
+    t.string   "runkeeper_id"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

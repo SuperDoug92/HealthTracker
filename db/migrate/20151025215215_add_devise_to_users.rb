@@ -7,7 +7,10 @@ class AddDeviseToUsers < ActiveRecord::Migration
       t.decimal :weight
       t.decimal :weight_loss_rate
       t.decimal :goal_weight
-            
+
+      #app info
+      t.string :runkeeper_id
+
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""

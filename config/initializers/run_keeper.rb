@@ -5,8 +5,8 @@ HealthGraph.configure do |config|
 end
 
 auth_url = HealthGraph.authorize_url
-puts "health graph"
-puts auth_url
+# puts "health graph"
+# puts auth_url
 #
 # access_token = HealthGraph.access_token('2d815d7d08544ac78cdbd5a2808d10e7')
 # puts "access_token"
