@@ -25,7 +25,7 @@ class ActivityController < ApplicationController
   private
 
   def activity_params
-    params.require(:activity).permit(:body)
+    params.require(:activity)..permit_all_parameters
   end
 
 end
