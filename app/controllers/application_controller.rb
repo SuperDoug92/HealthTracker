@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
       activities_hash = JSON.parse activities
       # puts activities
       current_user.runkeeper_id = runkeeper_user.access_token
+      current_user.save!
       activities_hash["items"].each do |activity|
         local_activity = current_user.activities.create
         local_activity.start_time = activity["start_time"]
@@ -39,7 +40,7 @@ class ApplicationController < ActionController::Base
         local_activity.total_calories = activity["total_calories"]
         local_activity.climb = activity["climb"]
         local_activity.notes = activity["notes"]
-         
+
         local_activity.save
         puts "8888888 " + local_activity.to_s + " 888888888"
         # local_activity = current_user.activity.new
@@ -47,7 +48,6 @@ class ApplicationController < ActionController::Base
       end
       # puts runkeeper_user
       # activity = runkeeper_user.fitness_activity_summary('uri' => 'uri-of-activity')
-      raise
     end
 
   end

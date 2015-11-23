@@ -3,6 +3,11 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  name                   :string(255)
+#  weight                 :decimal(, )
+#  weight_loss_rate       :decimal(, )
+#  goal_weight            :decimal(, )
+#  runkeeper_id           :string(255)
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default(""), not null
 #  reset_password_token   :string(255)
