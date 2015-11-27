@@ -1,10 +1,25 @@
-<div class="row">
-   <div class="col-md-8">
-     <div class="media">
-       <%= @items.count %>
-       <% @items.each do |item| %>
-        <p> <%= item.type %> for <%= item.duration %> seconds </p>
-       <% end %>
-     </div>
-   </div>
+<div class="container">
+  <h2>Workouts</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Excercise</th>
+        <th>Distance</th>
+        <th>Duration</th>
+        <th>Calories</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td> <%= item.start_time[0..-9]%> </td>
+          <td> <%= item.type %> </td>
+          <td> <%= Unit.new("#{item.total_distance} m").convert_to ('mi') %> </td>
+          <td> <%= Time.at(item.duration ).utc.strftime("%H:%M:%S") %> </td>
+          <td> <%= item.total_calories %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

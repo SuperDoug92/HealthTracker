@@ -4,14 +4,14 @@ Rails.application.routes.draw do
   resources :users
 
   get 'overview/index'
-
-  get 'user/index'
-
-  get 'user/new'
-
-  get 'user/show'
-
-  get 'user/edit'
+  # 
+  # get 'user/index'
+  #
+  # get 'user/new'
+  #
+  # get 'user/show'
+  #
+  # get 'user/edit'
 
   root to: 'welcome#index'
 

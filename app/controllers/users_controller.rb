@@ -12,9 +12,9 @@ class UsersController < ApplicationController
     runkeeper_user = HealthGraph::User.new(@user.runkeeper_id)
 
     puts runkeeper_user
-    fitness_activities = runkeeper_user.fitness_activities
-    puts runkeeper_user.fitness_activities.items
-    @items = runkeeper_user.fitness_activities.items
+    fitness_activities = runkeeper_user.fitness_activities :pageSize => 50
+    puts fitness_activities.items
+    @items = fitness_activities.items
     # raise
 
     # activities = runkeeper_user.fitness_activities.body.to_json
