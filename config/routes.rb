@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :users
 
   get 'overview/index'
-  # 
+  get 'overview/chart1'
+  #
   # get 'user/index'
   #
   # get 'user/new'
