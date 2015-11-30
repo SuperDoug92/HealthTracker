@@ -78,8 +78,6 @@ GEM
       thor (~> 0.14)
     hashdiff (0.2.3)
     hashie (1.2.0)
-    highcharts-rails (4.1.5)
-      railties (>= 3.1)
     hike (1.2.3)
     httparty (0.13.7)
       json (~> 1.8)
@@ -184,7 +182,6 @@ DEPENDENCIES
   faker
   figaro
   health_graph!
-  highcharts-rails
   httparty
   jbuilder (~> 2.0)
   jquery-rails

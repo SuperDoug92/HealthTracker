@@ -48,7 +48,7 @@ gem 'devise'
 
 gem 'bootstrap-sass'
 
-gem 'highcharts-rails'
+# gem 'highcharts-rails'
 
 gem 'figaro'
 

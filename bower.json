@@ -1,0 +1,23 @@
+{
+  "name": "HealthTracker",
+  "homepage": "https://github.com/SuperDoug92/HealthTracker",
+  "authors": [
+    "superdoug92 <clarke.doug248@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "highcharts": "~4.1.9"
+  }
+}
