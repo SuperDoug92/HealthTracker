@@ -67,7 +67,7 @@
     <div class="panel-heading">My apps</div>
     <div class="panel-body">
       <% if !resource.runkeeper_id %>
-        <%= button_to "Connect to Runkeeper", HealthGraph.authorize_url%>
+        <%= button_to "Connect to Runkeeper", HealthGraph.authorize_url %>
       <% else %>
         <p>Logged in to runkeeper</p>
       <% end %>

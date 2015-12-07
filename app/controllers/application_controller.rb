@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  before_action :test_runkeeper
   before_action :runkeeper_setup
 
   class Collection
@@ -26,47 +27,69 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def runkeeper_setup
-    @user = current_user
-    runkeeper_user = HealthGraph::User.new(@user.runkeeper_id)
-    num_activities = runkeeper_user.fitness_activities.size
-    fitness_activities = runkeeper_user.fitness_activities :pageSize => num_activities
-    @items = fitness_activities.items
-    @activity_types = Array.new
-    @activity_dates = Array.new
-    @activity_distances = Array.new
-    @activity_calories = Array.new
-    @collection = Collection.new
+  def test_runkeeper
+    # puts "testing run keeper"
+    # puts params
+    # access_token
+    if params[:code] && current_user && current_user.runkeeper_id == nil
+      access_token = HealthGraph.access_token(params[:code])
+      # puts access_token
+      # puts "hello"
 
-    @items.each do |item|
-      @activity_dates << item.start_time.to_time.strftime("%b %d")
-      if !@activity_types.include?item.type then
-        @activity_types << item.type
-      end
+      runkeeper_user = HealthGraph::User.new(access_token)
+      activities = runkeeper_user.fitness_activities.body.to_json
+      activities_hash = JSON.parse activities
+      # puts activities
+      current_user.runkeeper_id = runkeeper_user.access_token
+      current_user.save!
     end
 
-    @activity_types.each do |type|
-      @activity_distances.clear
-      @activity_calories.clear
+  end
+
+  def runkeeper_setup
+    # raise
+    if current_user && current_user.runkeeper_id
+      @user = current_user
+      # raise
+      runkeeper_user = HealthGraph::User.new(@user.runkeeper_id)
+      num_activities = runkeeper_user.fitness_activities.size
+      fitness_activities = runkeeper_user.fitness_activities :pageSize => num_activities
+      @items = fitness_activities.items
+      @activity_types = Array.new
+      @activity_dates = Array.new
+      @collection = Collection.new
+
       @items.each do |item|
-        if item.type = type then
-          distance = Unit.new("#{item.total_distance} m")
-          distance >>= "mi"
-
-          @activity_distances << distance.to_s(0...-2).to_f
-
-          @activity_calories << item.total_calories
-        else
-          @activity_distances << 0
-          @activity_calories << 0
+        @activity_dates << item.start_time.to_time.strftime("%b %d")
+        if !@activity_types.include?item.type then
+          @activity_types << item.type
         end
       end
 
-      @collection.series << Series.new(type, @activity_distances)
-    end
+      @activity_types.each do |type|
+        @activity_distances = Array.new
+        @activity_calories = Array.new
+        @items.each do |item|
 
-    gon.activity_dates = @activity_dates
-    gon.series = @collection.series
+          if item.type == type
+            distance = Unit.new("#{item.total_distance} m")
+            distance >>= "mi"
+
+            @activity_distances << distance.to_s(0...-2).to_f
+
+            @activity_calories << item.total_calories
+          else
+            @activity_distances << 0
+            @activity_calories << 0
+          end
+        end
+
+        @collection.series << Series.new(type, @activity_distances)
+      end
+
+      gon.activity_dates = @activity_dates
+      gon.series = @collection.series
+    end
   end
 
   protected
