@@ -46,9 +46,15 @@ class ApplicationController < ActionController::Base
     end
 
     @activity_types.each do |type|
+      @activity_distances.clear
+      @activity_calories.clear
       @items.each do |item|
         if item.type = type then
-          @activity_distances << item.total_distance#Unit.new("#{item.total_distance} m").convert_to ('mi')
+          distance = Unit.new("#{item.total_distance} m")
+          distance >>= "mi"
+
+          @activity_distances << distance.to_s(0...-2).to_f
+
           @activity_calories << item.total_calories
         else
           @activity_distances << 0
@@ -58,6 +64,7 @@ class ApplicationController < ActionController::Base
 
       @collection.series << Series.new(type, @activity_distances)
     end
+
     gon.activity_dates = @activity_dates
     gon.series = @collection.series
   end
