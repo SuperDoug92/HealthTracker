@@ -15,7 +15,7 @@
         },
         xAxis: {
 
-            categories: [activity_types],
+            categories: gon.activity_dates,
             title: {
                 text: 'Date'
             }
@@ -35,15 +35,6 @@
                 stacking: 'normal'
             }
         },
-        series: [{
-            name: 'Run',
-            data: [5, 3, 4, 7, 2]
-        }, {
-            name: 'Bike',
-            data: [2, 2, 3, 2, 1]
-        }, {
-            name: 'Swim',
-            data: [3, 4, 4, 2, 5]
-        }]
+        series: gon.series
     });
 });

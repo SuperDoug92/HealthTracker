@@ -8,7 +8,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-
     runkeeper_user = HealthGraph::User.new(@user.runkeeper_id)
     num_activities = runkeeper_user.fitness_activities.size
     fitness_activities = runkeeper_user.fitness_activities :pageSize => num_activities
@@ -20,7 +19,7 @@ class UsersController < ApplicationController
       end
     end
     gon.activity_types = @activity_types
-    
+
   end
 
   def edit

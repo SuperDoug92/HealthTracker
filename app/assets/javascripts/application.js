@@ -17,5 +17,3 @@
 //= require highcharts
 //= require turbolinks
 //= require_tree .
-
-var activity_types = gon.activity_types
