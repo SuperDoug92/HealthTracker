@@ -58,10 +58,11 @@ class ApplicationController < ActionController::Base
       @activity_types = Array.new
       @activity_dates = Array.new
       @collection = Collection.new
+      gon.max_distance = 0
 
       @items.each do |item|
         @activity_dates << item.start_time.to_time.strftime("%b %d")
-        if !@activity_types.include?item.type then
+        if !@activity_types.include?item.type
           @activity_types << item.type
         end
       end
@@ -72,10 +73,12 @@ class ApplicationController < ActionController::Base
         @items.each do |item|
 
           if item.type == type
-            distance = Unit.new("#{item.total_distance} m")
-            distance >>= "mi"
+            distance = item.total_distance/1609.34
+            if gon.max_distance < distance
+              gon.max_distance = distance
+            end
 
-            @activity_distances << distance.to_s(0...-2).to_f
+            @activity_distances << distance
 
             @activity_calories << item.total_calories
           else

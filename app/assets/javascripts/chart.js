@@ -16,13 +16,15 @@
         xAxis: {
 
             categories: gon.activity_dates,
+            max: 6,
             title: {
                 text: 'Date'
             }
         },
         yAxis: {
             opposite: true,
-            min: 0,
+            tickInterval: 1,
+            max: gon.max_distance,
             title: {
                 text: 'Miles'
             }
@@ -30,11 +32,17 @@
         legend: {
             reversed: true
         },
+
         plotOptions: {
             series: {
-                stacking: 'normal'
+                stacking: 'normal',
             }
         },
+
+        scrollbar: {
+            enabled: true
+        },
+
         series: gon.series
     });
 });
