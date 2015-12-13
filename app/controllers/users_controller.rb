@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def index
   end
 
@@ -7,7 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = params[:id].nil? ? current_user : User.find(params[:id])
+
     runkeeper_user = HealthGraph::User.new(@user.runkeeper_id)
     num_activities = runkeeper_user.fitness_activities.size
     fitness_activities = runkeeper_user.fitness_activities :pageSize => num_activities

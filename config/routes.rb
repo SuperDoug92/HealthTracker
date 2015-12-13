@@ -1,20 +1,19 @@
 Rails.application.routes.draw do
+
   devise_for :users
 
   resources :users
 
   get 'overview/index'
   get 'overview/chart1'
-  #
-  # get 'user/index'
-  #
-  # get 'user/new'
-  #
-  # get 'user/show'
-  #
-  # get 'user/edit'
 
-  root to: 'welcome#index'
+  authenticated :user do
+    root to: "users#show", as: :authenticated_root
+  end
+
+  unauthenticated do
+    root to: "welcome#index", as: :public_root
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
