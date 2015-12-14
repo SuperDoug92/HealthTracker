@@ -7,36 +7,59 @@
     </div>
     <div class="panel-body">
       <ul class="nav nav-pills nav-stacked">
-        <li role="presentation" class="active"><%= link_to "Table", 'table' %></li>
-        <li role="presentation"><%= link_to "Chart",'#',:id => 'chart' %></li>
-        <li role="presentation"><%= link_to "Running", :id => 'running_chart' %></li>
-        <li role="presentation"><%= link_to "Cycling", :id => 'cycling_chart' %></li>
-        <li role="presentation"><%= link_to "Swimming", :id => 'swimming_chart' %></li>
+        <li class="active"><a data-toggle="tab" href="#table">Table</a></li>
+        <li><a data-toggle="tab" href="#chart_1">Chart</a></li>
+        <li><a data-toggle="tab" href="#running_chart">Running</a></li>
+        <li><a data-toggle="tab" href="#cycling_chart">Cycling</a></li>
+        <li><a data-toggle="tab" href="#swimming_chart">Swimming</a></li>
+      </ul>
     </div>
+
   </div>
 </div>
 
 <div class="col-md-9">
-  <table class="table table-striped header-fixed">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Excercise</th>
-        <th>Distance</th>
-        <th>Duration</th>
-        <th>Calories</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @items.each do |item| %>
-        <tr>
-          <td> <%= item.start_time[0..-9]%> </td>
-          <td> <%= item.type %> </td>
-          <td> <%= "#{(item.total_distance/1609.34).round(2)} mi" %> </td>
-          <td> <%= Time.at(item.duration ).utc.strftime("%H:%M:%S") %> </td>
-          <td> <%= item.total_calories %> </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+
+  <div class="tab-content">
+    <div id="table" class="tab-pane fade in active">
+      <table class="table table-striped header-fixed">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Excercise</th>
+            <th>Distance</th>
+            <th>Duration</th>
+            <th>Calories</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td> <%= item.start_time[0..-9]%> </td>
+              <td> <%= item.type %> </td>
+              <td> <%= "#{(item.total_distance/1609.34).round(2)} mi" %> </td>
+              <td> <%= Time.at(item.duration ).utc.strftime("%H:%M:%S") %> </td>
+              <td> <%= item.total_calories %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div id="chart_1" class="tab-pane fade">
+      <div id="container" style="height: 400px"></div>
+    </div>
+    <div id="running_chart" class="tab-pane fade">
+      <h3>Menu 2</h3>
+      <p>Some content in menu 2.</p>
+    </div>
+    <div id="cycling_chart" class="tab-pane fade">
+      <h3>Menu 3</h3>
+      <p>Some content in menu 2.</p>
+    </div>
+    <div id="swimming_chart" class="tab-pane fade">
+      <h3>Menu 4</h3>
+      <p>Some content in menu 2.</p>
+    </div>
+  </div>
+
 </div>

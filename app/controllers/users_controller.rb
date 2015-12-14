@@ -10,17 +10,21 @@ class UsersController < ApplicationController
   def show
     @user = params[:id].nil? ? current_user : User.find(params[:id])
 
-    runkeeper_user = HealthGraph::User.new(@user.runkeeper_id)
-    num_activities = runkeeper_user.fitness_activities.size
-    fitness_activities = runkeeper_user.fitness_activities :pageSize => num_activities
-    @items = fitness_activities.items
-    @activity_types = Array.new
-    @items.each do |item|
-      if item.total_distance > 0 and !@activity_types.include?item.type then
-        @activity_types << item.type
-      end
-    end
-    gon.activity_types = @activity_types
+    @runkeeper_activity = RunkeeperActivity.new(@user)
+
+    # runkeeper_user = HealthGraph::User.new(@user.runkeeper_id)
+    @runkeeper_activity.table
+
+    gon.activity_types = @runkeeper_activity.activity_types
+    @items = @runkeeper_activity.items
+
+
+
+    @runkeeper_activity.chart
+    gon.max_distance = @runkeeper_activity.max_distance
+    gon.activity_dates = @runkeeper_activity.activity_dates
+
+    gon.series = @runkeeper_activity.series
 
   end
 
