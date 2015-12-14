@@ -17,3 +17,10 @@
 
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+  $('#chart').click(function(event){
+    alert('Hooray!');
+    event.preventDefault(); // Prevent link from following its href
+  });
+});

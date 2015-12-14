@@ -1,5 +1,22 @@
-<div class="container">
-  <h2>Workouts</h2>
+<br>
+
+<div class="col-md-3">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Excercises</h3>
+    </div>
+    <div class="panel-body">
+      <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="active"><%= link_to "Table", 'table' %></li>
+        <li role="presentation"><%= link_to "Chart",'#',:id => 'chart' %></li>
+        <li role="presentation"><%= link_to "Running", :id => 'running_chart' %></li>
+        <li role="presentation"><%= link_to "Cycling", :id => 'cycling_chart' %></li>
+        <li role="presentation"><%= link_to "Swimming", :id => 'swimming_chart' %></li>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-9">
   <table class="table table-striped header-fixed">
     <thead>
       <tr>
@@ -15,7 +32,7 @@
         <tr>
           <td> <%= item.start_time[0..-9]%> </td>
           <td> <%= item.type %> </td>
-          <td> <%= Unit.new("#{item.total_distance} m").convert_to ('mi') %> </td>
+          <td> <%= "#{(item.total_distance/1609.34).round(2)} mi" %> </td>
           <td> <%= Time.at(item.duration ).utc.strftime("%H:%M:%S") %> </td>
           <td> <%= item.total_calories %> </td>
         </tr>
