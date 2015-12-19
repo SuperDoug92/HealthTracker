@@ -27,55 +27,6 @@ class ApplicationController < ActionController::Base
 
   end
 
-  # def runkeeper_setup
-  #   # raise
-  #   if current_user && current_user.runkeeper_id
-  #     @user = current_user
-  #     # raise
-  #     runkeeper_user = HealthGraph::User.new(@user.runkeeper_id)
-  #     num_activities = runkeeper_user.fitness_activities.size
-  #     fitness_activities = runkeeper_user.fitness_activities :pageSize => num_activities
-  #     @items = fitness_activities.items
-  #     @activity_types = Array.new
-  #     @activity_dates = Array.new
-  #     @collection = Collection.new
-  #     gon.max_distance = 0
-  #
-  #     @items.each do |item|
-  #       @activity_dates << item.start_time.to_time.strftime("%b %d")
-  #       if !@activity_types.include?item.type
-  #         @activity_types << item.type
-  #       end
-  #     end
-  #
-  #     @activity_types.each do |type|
-  #       @activity_distances = Array.new
-  #       @activity_calories = Array.new
-  #       @items.each do |item|
-  #
-  #         if item.type == type
-  #           distance = item.total_distance/1609.34
-  #           if gon.max_distance < distance
-  #             gon.max_distance = distance
-  #           end
-  #
-  #           @activity_distances << distance
-  #
-  #           @activity_calories << item.total_calories
-  #         else
-  #           @activity_distances << 0
-  #           @activity_calories << 0
-  #         end
-  #       end
-  #
-  #       @collection.series << Series.new(type, @activity_distances)
-  #     end
-  #
-  #     gon.activity_dates = @activity_dates
-  #     gon.series = @collection.series
-  #   end
-  # end
-
   protected
 
   def configure_permitted_parameters

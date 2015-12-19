@@ -18,11 +18,10 @@ class UsersController < ApplicationController
     gon.activity_types = @runkeeper_activity.activity_types
     @items = @runkeeper_activity.items
 
-
-
     @runkeeper_activity.chart
     gon.max_distance = @runkeeper_activity.max_distance
     gon.activity_dates = @runkeeper_activity.activity_dates
+    gon.running_pr_series = @runkeeper_activity.running_pr_series 
 
     gon.series = @runkeeper_activity.series
 
