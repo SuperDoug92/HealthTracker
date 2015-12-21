@@ -1,3 +1,4 @@
+var N = 45; 
 $(function () {
     new Highcharts.Chart({
         chart: {
@@ -5,12 +6,15 @@ $(function () {
         },
         title: {
             text: 'Pace by Mile',
-            x: -20 //center
         },
         xAxis: {
-            categories: [1,2,3,4,5,6,7,8,9,10,11,12]
+            categories: Array.apply(null, {length: N}).map(Number.call, Number),
+            title: {
+                text: 'Miles'
+            },
         },
         yAxis: {
+            tickInterval: 1,
             title: {
                 text: 'Pace'
             },
@@ -21,7 +25,7 @@ $(function () {
             }]
         },
         tooltip: {
-            valueSuffix: '°C'
+            valueSuffix: ' minutes'
         },
         legend: {
             layout: 'vertical',
@@ -29,12 +33,6 @@ $(function () {
             verticalAlign: 'middle',
             borderWidth: 0
         },
-        series: [{
-            name: 'Fastest',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }, {
-            name: 'Most Recent',
-            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-        }]
+        series: [gon.cycling_pr_series, gon.cycling_current_series]
     });
 });

@@ -35,8 +35,6 @@ class RunkeeperActivity
     @activity_types = Array.new
     @activity_dates = Array.new
     @collection = Collection.new
-    @running_pr = Array.new
-    @running_recent = Array.new
     @max_distance = 0
 
     @items.each do |item|
@@ -51,6 +49,8 @@ class RunkeeperActivity
       @activity_calories = Array.new
       @activity_duration = Array.new
       @type_start_times = Array.new
+      @pr = Array.new
+      @recent = Array.new
       @items.each do |item|
 
         if item.type == type
@@ -71,28 +71,72 @@ class RunkeeperActivity
         end
       end
 
-      if type == "Running"
-        # @activity_distances.zip(@type_start_times).zip(@activity_duration).sort_by{|activity| activity.activity_duration}each do |distance, start_time, duration|
-        #   for i in 0..distance.floor
-        #     if  @running_recent[i].nil? && distance > 0 && !duration.nil?
-        #       @running_recent[i] = ((duration/60)/distance).round(2)
-        #     elsif distance > 0 && !duration.nil? && (duration/60)/distance < @running_pr[i]
-        #       @running_pr[i] = ((duration/60)/distance).round(2)
-        #     end
-        #   end
-        # end
+      if type == "Running" || type == "Swimming" || type == "Cycling"
+        @activity_distances.zip(@type_start_times, @activity_duration).sort_by{|activity| activity[0]}.reverse!.each do |distance, start_time, duration|
+          if start_time != 0 && distance > 0 && duration > 0
+            #initialize variables
+            if @mileage.nil?
+              @mileage = distance.floor
+              @start = start_time
+              @pace = ((duration/60)/distance).round(2)
+            end
 
-        @activity_distances.zip(@activity_duration).each do |distance, duration|
-          for i in 0..distance.floor
-            if  @running_pr[i].nil?
-              @running_pr[i] = ((duration/60)/distance).round(2)
-            elsif distance > 0 && !duration.nil? && (duration/60)/distance < @running_pr[i]
-              @running_pr[i] = ((duration/60)/distance).round(2)
+            if @mileage == distance.floor
+              if @start < start_time
+                @start = start_time
+                @pace = ((duration/60)/distance).round(2)
+              end
+              if @start == @start_last && ((duration/60)/distance).round(2) < @pace_last
+                @start = start_time
+                @pace = ((duration/60)/distance).round(2)
+              end
+            elsif @mileage > distance.floor
+              #initilaize variables
+              if @start_last.nil?
+                @start_last = @start
+                @pace_last = @pace
+              end
+
+              if @start >= @start_last || @pace < @pace_last
+                @mileage.times do |number|
+                  @recent[number] = @pace
+                end
+                # if type = "Cycling"
+                #   raise
+                # end
+                @start_last = @start
+                @pace_last = @pace
+              end
+              @mileage = distance.floor
+              if @start < start_time || @pace > ((duration/60)/distance).round(2)
+                @start = start_time
+                @pace = ((duration/60)/distance).round(2)
+              end
             end
           end
         end
-        @running_pr_series = Series.new("Record", @running_pr)
 
+        @activity_distances.zip(@activity_duration).each do |distance, duration|
+          distance.floor.times do |i|
+            if  @pr[i].nil?
+              @pr[i] = ((duration/60)/distance).round(2)
+            elsif distance > 0 && !duration.nil? && ((duration/60)/distance).round(2) < @pr[i]
+              @pr[i] = ((duration/60)/distance).round(2)
+            end
+          end
+        end
+        if type == "Running"
+          @running_pr_series = Series.new("Record", @pr.dup)
+          @running_current_series = Series.new("Recent", @recent.dup)
+        elsif type == "Swimming"
+          @swimming_pr_series = Series.new("Record", @pr.dup)
+          @swimming_current_series = Series.new("Recent", @recent.dup)
+        elsif type == "Cycling"
+
+          @cycling_pr_series = Series.new("Record", @pr.dup)
+          @cycling_current_series = Series.new("Recent", @recent.dup)
+          
+        end
       end
 
       @collection.series << Series.new(type, @activity_distances)
@@ -101,6 +145,26 @@ class RunkeeperActivity
     @activity_dates = @activity_dates
     @series = @collection.series
 
+  end
+
+  def swimming_current_series
+    @swimming_current_series
+  end
+
+  def swimming_pr_series
+    @swimming_pr_series
+  end
+
+  def cycling_current_series
+    @cycling_current_series
+  end
+
+  def cycling_pr_series
+    @cycling_pr_series
+  end
+
+  def running_current_series
+    @running_current_series
   end
 
   def running_pr_series

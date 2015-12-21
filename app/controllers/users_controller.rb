@@ -21,7 +21,12 @@ class UsersController < ApplicationController
     @runkeeper_activity.chart
     gon.max_distance = @runkeeper_activity.max_distance
     gon.activity_dates = @runkeeper_activity.activity_dates
-    gon.running_pr_series = @runkeeper_activity.running_pr_series 
+    gon.running_pr_series = @runkeeper_activity.running_pr_series
+    gon.running_current_series = @runkeeper_activity.running_current_series
+    gon.swimming_pr_series = @runkeeper_activity.swimming_pr_series
+    gon.swimming_current_series = @runkeeper_activity.swimming_current_series
+    gon.cycling_pr_series = @runkeeper_activity.cycling_pr_series
+    gon.cycling_current_series = @runkeeper_activity.cycling_current_series
 
     gon.series = @runkeeper_activity.series
 
